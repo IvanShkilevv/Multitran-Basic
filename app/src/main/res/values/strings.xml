@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Multitran Basic</string>
     <string name="name">Введите текст</string>
+    <string name="translate_button">Перевести</string>
 
     <string-array name="languages">
         <item>ENG</item>
