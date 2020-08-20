@@ -3,6 +3,9 @@ package com.example.android.multitranbasic;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -43,11 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 String inputLanguage = inputLanguageSpinner.getSelectedItem().toString();
                 String outputLanguage = outputLanguageSpinner.getSelectedItem().toString();
 
-                if (checkUserInput(inputText)) {
+                if (checkUserInput(inputText) && checkNetworkConnection()) {
                     String url = queryUtils.buildUrl(inputText, inputLanguage, outputLanguage);
                     webView.loadUrl(url);
                 }
-
             }
         });
 
@@ -70,12 +72,27 @@ public class MainActivity extends AppCompatActivity {
      boolean userInputPresence = false;
 
      if (! inputText.isEmpty()) {
-         userInputPresence = true;}
+         userInputPresence = true;
+     }
      else {
          Snackbar.make(rootLayout, "Введите слово, которое хотите перевести", Snackbar.LENGTH_SHORT).show();
      }
 
      return userInputPresence;
+    }
+
+    private boolean checkNetworkConnection() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = false;
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            isConnected = true;
+        }
+        else {
+            Snackbar.make(rootLayout, "Нет интернет соединения", Snackbar.LENGTH_SHORT).show();
+        }
+
+        return isConnected;
     }
 
 
