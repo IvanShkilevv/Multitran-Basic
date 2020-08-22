@@ -34,5 +34,4 @@ public class QueryUtils {
         return languageId;
     }
 
-
 }

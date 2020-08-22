@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rootLayout = findViewById(R.id.constraint_layout);
-        inputLanguageSpinner =  findViewById(R.id.input_language_spinner);
-        outputLanguageSpinner =  findViewById(R.id.output_language_spinner);
+        inputLanguageSpinner = findViewById(R.id.input_language_spinner);
+        outputLanguageSpinner = findViewById(R.id.output_language_spinner);
         webView = findViewById(R.id.web_view);
         inputTextView = findViewById(R.id.input_text_view);
         translateButton = findViewById(R.id.translate_button);
@@ -53,10 +53,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-    private void setupSpinners () {
+    private void setupSpinners() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.languages, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,17 +67,16 @@ public class MainActivity extends AppCompatActivity {
         inputLanguageSpinner.setSelection(1);
     }
 
-    private boolean checkUserInput (String inputText) {
-     boolean userInputPresence = false;
+    private boolean checkUserInput(String inputText) {
+        boolean userInputPresence = false;
 
-     if (! inputText.isEmpty()) {
-         userInputPresence = true;
-     }
-     else {
-         Snackbar.make(rootLayout, "Введите слово, которое хотите перевести", Snackbar.LENGTH_SHORT).show();
-     }
+        if (!inputText.isEmpty()) {
+            userInputPresence = true;
+        } else {
+            Snackbar.make(rootLayout, "Введите слово, которое хотите перевести", Snackbar.LENGTH_SHORT).show();
+        }
 
-     return userInputPresence;
+        return userInputPresence;
     }
 
     private boolean checkNetworkConnection() {
@@ -87,15 +85,11 @@ public class MainActivity extends AppCompatActivity {
         boolean isConnected = false;
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             isConnected = true;
-        }
-        else {
+        } else {
             Snackbar.make(rootLayout, "Нет интернет соединения", Snackbar.LENGTH_SHORT).show();
         }
 
         return isConnected;
     }
-
-
-
 
 }
